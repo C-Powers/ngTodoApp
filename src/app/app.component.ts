@@ -35,7 +35,12 @@ let DISPLAYSTATE = 'all';
         </ul>
       </section>
 
-      <display-group [(activeDisplayState)]="displayState"></display-group>
+      <display-group
+        [activeCount]="activeCount" 
+        [activeDisplayState]="displayState"
+        (onDisplayChange)="onDisplayChange($event)"
+      >
+      </display-group>
     </section>
   `,
 })
@@ -44,16 +49,31 @@ export class AppComponent  {
   items = ITEMS;
   displayState = DISPLAYSTATE;
   value = '';
+  activeCount = (function(allItems: TodoItem[]): number {
+    let count = 0;
+    for (let item of allItems) {
+      if (item.state === 'active') {
+        count++;
+      }
+    }
+    console.log('active count', count)
+    return count;
+  })(this.items);
+
   addNewTodo(value: string) {
     console.log('state from main component', this.displayState);
-    console.log('all items from main component', this.items);
     this.value = value;
-    console.log(this.value);
+    console.log('new todo', this.value);
     this.items.push({
       id: 0,
       state: 'active',
       name: value
     });
+    console.log('all items from main component', this.items);
+  }
+
+  onDisplayChange(value: string) {
+    this.displayState = value;
   }
 }
 
