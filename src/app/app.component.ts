@@ -6,7 +6,7 @@ const ITEMS: TodoItem[] = [
   {id: 2, state: 'active', name: 'sleep'}
 ];
 
-let DISPLAYSTATE: string = "all";
+let DISPLAYSTATE = 'all';
 
 @Component({
   selector: 'my-app',
@@ -35,7 +35,7 @@ let DISPLAYSTATE: string = "all";
         </ul>
       </section>
 
-      <display-group></display-group>
+      <display-group [(activeDisplayState)]="displayState"></display-group>
     </section>
   `,
 })
@@ -45,6 +45,8 @@ export class AppComponent  {
   displayState = DISPLAYSTATE;
   value = '';
   addNewTodo(value: string) {
+    console.log('state from main component', this.displayState);
+    console.log('all items from main component', this.items);
     this.value = value;
     console.log(this.value);
     this.items.push({

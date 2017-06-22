@@ -26,3 +26,7 @@ export class StateFilterPipe implements PipeTransform {
         }
     }
 }
+
+/**
+ * https://stackoverflow.com/questions/34164413/how-to-apply-filters-to-ngfor#
+ */

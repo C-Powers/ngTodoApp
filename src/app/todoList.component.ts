@@ -27,8 +27,6 @@ export class TodoListComponent {
     @Input() item: TodoItem;
     @Input() allItems: TodoItem[];
 
-    constructor(private render: Renderer) {}
-
     stateToggle(event: any) {
         if (this.item.state === 'active') {
             this.item.state = 'completed';
