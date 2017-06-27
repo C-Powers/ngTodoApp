@@ -1,4 +1,4 @@
-import { Component, Input, Renderer } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Renderer } from '@angular/core';
 import { TodoItem } from './shared/todoItem';
 
 @Component({
@@ -10,6 +10,7 @@ import { TodoItem } from './shared/todoItem';
                     (click)="stateToggle($event)" 
                     class="toggle" 
                     type="checkbox"
+                    [checked]="setCheckedState()"
                 >
                 <label>{{item.name}}</label>
                 <button 
@@ -27,15 +28,27 @@ export class TodoListComponent {
     @Input() item: TodoItem;
     @Input() allItems: TodoItem[];
 
+    @Input() activeCount: number;
+    @Output() onCountChange = new EventEmitter<number>();
+
     stateToggle(event: any) {
         if (this.item.state === 'active') {
             this.item.state = 'completed';
+            this.activeCount--;
         } else {
             this.item.state = 'active';
+            this.activeCount++;
         }
+
+        this.onCountChange.emit(this.activeCount);
     }
 
     destroyItem() {
         this.allItems.splice(this.allItems.indexOf(this.item), 1);
+    }
+
+    setCheckedState() {
+        if (this.item.state === 'completed') return true;
+        else if (this.item.state === 'active') return false;
     }
 }

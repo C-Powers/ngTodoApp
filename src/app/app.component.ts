@@ -30,6 +30,8 @@ let DISPLAYSTATE = 'all';
             [allItems]="items"
             *ngFor="let item of items | statefilter:displayState" 
             [item]="item"
+            [activeCount]="activeCount"
+            (onCountChange)="onCountChange($event)"
           > 
           </todo-list>
         </ul>
@@ -58,20 +60,16 @@ export class AppComponent  {
         count++;
       }
     }
-    console.log('active count', count)
     return count;
   })(this.items);
 
   addNewTodo(value: string) {
-    console.log('state from main component', this.displayState);
     this.value = value;
-    console.log('new todo', this.value);
     this.items.push({
       id: 0,
       state: 'active',
       name: value
     });
-    console.log('all items from main component', this.items);
   }
 
   onDisplayChange(value: string) {
@@ -79,10 +77,11 @@ export class AppComponent  {
   }
 
   onClearComplete(values: TodoItem[]) {
-    console.log('this.items before', this.items);
-    console.log('onclearcomplete values', values);
     this.items = values;
-    console.log('this.items after', this.items);
+  }
+
+  onCountChange(value: number) {
+    this.activeCount = value;
   }
 }
 
