@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-// import { TodoItem } from './todoItem';
+import { TodoItem } from './shared/todoItem';
 
 @Component({
     selector: 'display-group',
@@ -32,13 +32,21 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
                     </a>
                 </li>
             </ul>
-            <button class="clear-completed">Clear completed</button>
+            <button class="clear-completed" 
+                    (click)="onlyActiveTodos=clearCompleted(allItems)"
+            >
+                Clear completed
+            </button>
         </footer>
     `,
 })
 
 export class DisplayGroupComponent {
     @Input() activeCount: number;
+
+    @Input() allItems: TodoItem[];
+    @Output() onClearComplete = new EventEmitter<TodoItem[]>();
+
     @Input() activeDisplayState: string;
     @Output() onDisplayChange = new EventEmitter<string>();
 
@@ -48,7 +56,9 @@ export class DisplayGroupComponent {
         {name: 'completed', state: 'not-selected'}
     ];
 
-    updateDisplayState(buttonType: string) {
+    // onlyActiveTodos: TodoItem[];
+
+    updateDisplayState(buttonType: string): void {
         for (const button of this.buttons) {
             if (button.name === buttonType) {
                 button.state = 'selected';
@@ -58,5 +68,15 @@ export class DisplayGroupComponent {
         }
 
         this.onDisplayChange.emit(buttonType);
+    }
+
+    clearCompleted(items: TodoItem[]): void {
+        const onlyActive = items.filter((item) => {
+            if (item.state === 'active') {
+                return item;
+            }
+        });
+        console.log('onlyActive', onlyActive);
+        this.onClearComplete.emit(onlyActive);
     }
 }

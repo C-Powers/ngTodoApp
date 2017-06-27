@@ -37,6 +37,8 @@ let DISPLAYSTATE = 'all';
 
       <display-group
         [activeCount]="activeCount" 
+        [allItems]="items"
+        (onClearComplete)="onClearComplete($event)"
         [activeDisplayState]="displayState"
         (onDisplayChange)="onDisplayChange($event)"
       >
@@ -74,6 +76,13 @@ export class AppComponent  {
 
   onDisplayChange(value: string) {
     this.displayState = value;
+  }
+
+  onClearComplete(values: TodoItem[]) {
+    console.log('this.items before', this.items);
+    console.log('onclearcomplete values', values);
+    this.items = values;
+    console.log('this.items after', this.items);
   }
 }
 
