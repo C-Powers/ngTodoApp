@@ -45,6 +45,10 @@ export class TodoListComponent {
 
     destroyItem() {
         this.allItems.splice(this.allItems.indexOf(this.item), 1);
+        if (this.item.state === 'active') {
+            this.activeCount--;
+            this.onCountChange.emit(this.activeCount);
+        }
     }
 
     setCheckedState() {

@@ -24,7 +24,12 @@ let DISPLAYSTATE = 'all';
 
       <section class="main">
         <input class="toggle-all" type="checkbox">
-        <label for="toggle-all">Mark all as complete</label>
+        <label 
+          for="toggle-all" 
+          (click)="toggleAllStatus()"
+        >
+                Mark all as complete
+        </label>
         <ul class="todo-list">
           <todo-list 
             [allItems]="items"
@@ -70,6 +75,7 @@ export class AppComponent  {
       state: 'active',
       name: value
     });
+    this.activeCount++;
   }
 
   onDisplayChange(value: string) {
@@ -83,5 +89,25 @@ export class AppComponent  {
   onCountChange(value: number) {
     this.activeCount = value;
   }
-}
 
+  toggleAllStatus(): void {
+    let anyStatusActive = false;
+    for (let item of this.items) {
+      if (item.state === 'active') {
+        anyStatusActive = true;
+      }
+    }
+
+    if (anyStatusActive) {
+      for (let item of this.items) {
+        item.state = 'completed';
+      }
+      this.activeCount = 0;
+    } else {
+      for (let item of this.items) {
+        item.state = 'active';
+      }
+      this.activeCount = this.items.length;
+    }
+  }
+}
