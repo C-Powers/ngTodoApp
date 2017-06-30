@@ -68,7 +68,7 @@ export class AppComponent  {
     return count;
   })(this.items);
 
-  addNewTodo(value: string) {
+  addNewTodo(value: string): void {
     this.value = value;
     this.items.push({
       id: 0,
@@ -78,15 +78,15 @@ export class AppComponent  {
     this.activeCount++;
   }
 
-  onDisplayChange(value: string) {
+  onDisplayChange(value: string): void {
     this.displayState = value;
   }
 
-  onClearComplete(values: TodoItem[]) {
+  onClearComplete(values: TodoItem[]): void {
     this.items = values;
   }
 
-  onCountChange(value: number) {
+  onCountChange(value: number): void {
     this.activeCount = value;
   }
 

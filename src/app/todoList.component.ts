@@ -31,7 +31,7 @@ export class TodoListComponent {
     @Input() activeCount: number;
     @Output() onCountChange = new EventEmitter<number>();
 
-    stateToggle(event: any) {
+    stateToggle(event: any): void {
         if (this.item.state === 'active') {
             this.item.state = 'completed';
             this.activeCount--;
@@ -43,7 +43,7 @@ export class TodoListComponent {
         this.onCountChange.emit(this.activeCount);
     }
 
-    destroyItem() {
+    destroyItem(): void {
         this.allItems.splice(this.allItems.indexOf(this.item), 1);
         if (this.item.state === 'active') {
             this.activeCount--;
@@ -51,7 +51,7 @@ export class TodoListComponent {
         }
     }
 
-    setCheckedState() {
+    setCheckedState(): boolean {
         if (this.item.state === 'completed') return true;
         else if (this.item.state === 'active') return false;
     }
