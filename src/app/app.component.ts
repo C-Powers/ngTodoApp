@@ -14,7 +14,7 @@ let DISPLAYSTATE = 'all';
     <section class="todoapp">
       <header class="header">
         <h1>{{name}}</h1>
-        <input 
+        <input
           #newTodo
           (keyup.enter)="addNewTodo(newTodo.value); newTodo.value='' "
           class="new-todo" 
@@ -54,7 +54,7 @@ let DISPLAYSTATE = 'all';
   `,
 })
 export class AppComponent  {
-  name = 'qwerty';
+  name = 'AngularTODO';
   items = ITEMS;
   displayState = DISPLAYSTATE;
   value = '';

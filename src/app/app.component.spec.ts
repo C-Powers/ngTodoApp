@@ -1,4 +1,7 @@
 import { AppComponent } from './app.component';
+import { StateFilterPipe } from './shared/state-filter.pipe';
+import { TodoListComponent } from './todoList/todoList.component';
+import { DisplayGroupComponent } from './displayGroup/displayGroup.component';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
@@ -11,7 +14,12 @@ describe('AppComponent', function () {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppComponent ]
+      declarations: [
+        AppComponent,
+        StateFilterPipe,
+        TodoListComponent,
+        DisplayGroupComponent
+      ]
     })
     .compileComponents();
   }));
