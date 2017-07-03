@@ -12,7 +12,17 @@ import { TodoItem } from './shared/todoItem';
                     type="checkbox"
                     [checked]="setCheckedState()"
                 >
-                <label>{{item.name}}</label>
+                <label *ngIf="!isEdit"
+                    (click)="isEdit=true"
+                >
+                    {{item.name}}
+                </label>
+                <input *ngIf="isEdit"
+                    #editItemInput 
+                    (keydown.enter)="editItem(editItemInput.value)"
+                    class="new-todo"
+                    placeholder="Edit This Item"
+                >
                 <button 
                     (click)="destroyItem()"
                     class="destroy"
@@ -30,6 +40,8 @@ export class TodoListComponent {
 
     @Input() activeCount: number;
     @Output() onCountChange = new EventEmitter<number>();
+
+    isEdit = false;
 
     stateToggle(event: any): void {
         if (this.item.state === 'active') {
@@ -54,5 +66,11 @@ export class TodoListComponent {
     setCheckedState(): boolean {
         if (this.item.state === 'completed') return true;
         else if (this.item.state === 'active') return false;
+    }
+
+    editItem(newItemName: any) {
+        console.log(newItemName);
+        this.item.name = newItemName;
+        this.isEdit = false;
     }
 }
