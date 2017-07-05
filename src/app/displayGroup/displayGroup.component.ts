@@ -5,7 +5,8 @@ import { TodoItem } from '../shared/todoItem';
     selector: 'display-group',
     template: `
         <footer class="footer">
-            <span class="todo-count"><strong>{{activeCount}}</strong> items left</span>
+            <span *ngIf="activeCount === 0 || activeCount > 1" class="todo-count"><strong>{{activeCount}}</strong> items remaining</span>
+            <span *ngIf="activeCount === 1" class="todo-count"><strong>{{activeCount}}</strong> item remaining</span>
             <ul class="filters">
                 <li>
                     <a (click)="updateDisplayState('all')" 
