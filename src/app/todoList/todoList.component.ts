@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, Renderer } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TodoItem } from '../shared/todoItem';
 
 @Component({
@@ -20,8 +20,12 @@ import { TodoItem } from '../shared/todoItem';
                 <input *ngIf="isEdit"
                     #editItemInput 
                     (keydown.enter)="editItem(editItemInput.value)"
+                    (keydown)="onEscapePress($event)"
                     class="new-todo"
                     placeholder="Edit This Item"
+                    value="{{item.name}}"
+                    (blur)="onInputBlur()"
+                    focus-me="true"
                 >
                 <button 
                     (click)="destroyItem()"
@@ -68,9 +72,22 @@ export class TodoListComponent {
         else if (this.item.state === 'active') return false;
     }
 
-    editItem(newItemName: any) {
+    editItem(newItemName: any): void {
         console.log(newItemName);
         this.item.name = newItemName;
         this.isEdit = false;
+    }
+
+    onInputBlur(): void {
+        this.isEdit = false;
+    }
+
+    onEscapePress(event: any): void {
+        if (event.key === 'Escape') {
+            this.isEdit = false;
+            return;
+        } else {
+            return;
+        }
     }
 }
