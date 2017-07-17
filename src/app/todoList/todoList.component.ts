@@ -13,7 +13,7 @@ export class TodoListComponent {
     @Input() activeCount: number;
     @Output() onCountChange = new EventEmitter<number>();
 
-    isEdit = false;
+    public isEdit = false;
 
     stateToggle(event: any): void {
         if (this.item.state === 'active') {
