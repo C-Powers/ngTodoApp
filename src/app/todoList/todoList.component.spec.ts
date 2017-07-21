@@ -23,23 +23,16 @@ describe('TodoListComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TodoListComponent);
         comp = fixture.componentInstance;
-        // todoEl = fixture.debugElement.query(By.css('.todoItem-label'));
         todoEl = fixture.nativeElement;
-        // console.log('todoEl', todoEl);
         debugTodoEl = fixture.debugElement;
-        console.log('debugTodoEl', debugTodoEl);
-        console.log('----- test query', fixture.debugElement.query(By.css('label')));
-
-        toggleEl = todoEl.getElementsByClassName('toggle');
-        // console.log('toggleEl', toggleEl);
 
         expectedTodoItem = {
             id: 1000, state: 'active', name: 'test component'
         };
-        expectedActiveCount = 1;
 
         comp.item = expectedTodoItem;
-        comp.activeCount = expectedActiveCount;
+        comp.allItems = [expectedTodoItem];
+        comp.activeCount = comp.allItems.length;
         fixture.detectChanges();
     });
 
@@ -53,14 +46,30 @@ describe('TodoListComponent', () => {
 
     it('should display item name', () => {
         expect(todoEl.textContent).toContain(expectedTodoItem.name);
-        
     });
 
-    it('should toggle state when clicked', () => {
-        const completedItem = expectedTodoItem.state = 'completed';
+    it('stateToggle() should toggle state', () => {
+        comp.stateToggle();
+        expect(comp.item.state).toBe('completed');
+    });
 
-        toggleEl.triggerEventHandler('click', null);
-        // I think toggleEl has to be a DebugElement for this to work...
-        expect(expectedTodoItem).toBe(completedItem);
+    it('should remove the item from this.allItems', () => {
+        const previousLength = comp.activeCount;
+        comp.destroyItem();
+        expect(comp.activeCount).toBe(previousLength - 1);
+        expect(comp.allItems).not.toContain(expectedTodoItem);
+    });
+
+    it('should check if an item is completed', () => {
+        expect(comp.setCheckedState()).toBe(false);
+
+        comp.item.state = 'completed';
+        expect(comp.setCheckedState()).toBe(true);
+    });
+
+    it('sould change the name of the item', () => {
+        const newName = 'new item name';
+        comp.editItem(newName);
+        expect(comp.item.name).toBe(newName);
     });
 });
