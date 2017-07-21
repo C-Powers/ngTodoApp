@@ -11,7 +11,6 @@ describe('TodoListComponent', () => {
     let debugTodoEl: DebugElement;
     let toggleEl: any;
     let expectedTodoItem: TodoItem;
-    let expectedActiveCount: number;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
