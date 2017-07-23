@@ -15,7 +15,7 @@ export class DisplayGroupComponent {
     @Input() activeDisplayState: string;
     @Output() onDisplayChange = new EventEmitter<string>();
 
-    buttons = [
+    public buttons = [
         {name: 'all', state: 'selected'},
         {name: 'active', state: 'not-selected'},
         {name: 'completed', state: 'not-selected'}
@@ -24,7 +24,7 @@ export class DisplayGroupComponent {
     // onlyActiveTodos: TodoItem[];
 
     updateDisplayState(buttonType: string): void {
-        for (const button of this.buttons) {
+        for (let button of this.buttons) {
             if (button.name === buttonType) {
                 button.state = 'selected';
             } else {

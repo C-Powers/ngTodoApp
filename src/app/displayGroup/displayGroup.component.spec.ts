@@ -43,16 +43,38 @@ describe('DisplayGroupComponent', () => {
     //     expect(comp.buttons).toEqual([, , ]);
     // });
 
-    it('should destroy completed items', () => {
-        comp.clearCompleted(comp.allItems);
-        let noMoreCompleted = true;
-        console.log('comp.allItems after clear', comp.allItems);
-        comp.allItems.forEach(item => {
-            if (!noMoreCompleted) return;
-            if (item.state === "completed") noMoreCompleted = !noMoreCompleted;
+    it('should output the selected butotn type', (done: any) => {
+        const newState = 'active';
+        comp.onDisplayChange.subscribe((state: string) => {
+            expect(state).toBe(newState);
+            done();
         });
 
-        expect(noMoreCompleted).toBe(true);
+        comp.updateDisplayState(newState);
+    });
+
+    it('should update button select state', () => {
+        const states = ['active', 'completed', 'all'];
+
+        states.forEach((newState) => {
+            comp.updateDisplayState(newState);
+
+            comp.buttons.forEach(button => {
+                if (button.name === newState) {
+                    expect(button.state).toBe('selected');
+                }
+            });
+        });
+    });
+
+    it('should output only active items', (done: any) => {
+        comp.onClearComplete.subscribe((items: TodoItem[]) => {
+            items.forEach((item: TodoItem) => {
+                expect(item.state).toBe('active');
+            });
+            done();
+        });
+        comp.clearCompleted(expectedAllItems);
     });
 
 });

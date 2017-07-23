@@ -14,7 +14,7 @@ let DISPLAYSTATE = 'all';
 })
 export class AppComponent  {
   name = 'AngularTODO';
-  items = ITEMS;
+  items: TodoItem[] = ITEMS;
   displayState = DISPLAYSTATE;
   value = '';
   activeCount = (function(allItems: TodoItem[]): number {
@@ -29,11 +29,12 @@ export class AppComponent  {
 
   addNewTodo(value: string): void {
     this.value = value;
-    this.items.push({
-      id: 0,
-      state: 'active',
-      name: value
-    });
+    // this.items.push({
+    //   id: 0,
+    //   state: 'active',
+    //   name: value
+    // });
+    this.items.push(new TodoItem(0, 'active', value));
     this.activeCount++;
   }
 
