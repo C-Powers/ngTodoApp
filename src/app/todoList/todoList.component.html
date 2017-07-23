@@ -1,13 +1,14 @@
 <li *ngIf="item" class={{item.state}}>
     <div class="view">
         <input
-            (click)="stateToggle($event)" 
+            (click)="stateToggle()" 
             class="toggle" 
             type="checkbox"
             [checked]="setCheckedState()"
         >
         <label *ngIf="!isEdit"
             (click)="isEdit=true"
+            class="todoItem-label"
         >
             {{item.name}}
         </label>

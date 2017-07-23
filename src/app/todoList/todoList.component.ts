@@ -13,9 +13,9 @@ export class TodoListComponent {
     @Input() activeCount: number;
     @Output() onCountChange = new EventEmitter<number>();
 
-    isEdit = false;
+    public isEdit = false;
 
-    stateToggle(event: any): void {
+    stateToggle(): void {
         if (this.item.state === 'active') {
             this.item.state = 'completed';
             this.activeCount--;
@@ -40,7 +40,7 @@ export class TodoListComponent {
         else if (this.item.state === 'active') return false;
     }
 
-    editItem(newItemName: any): void {
+    editItem(newItemName: string): void {
         console.log(newItemName);
         this.item.name = newItemName;
         this.isEdit = false;
