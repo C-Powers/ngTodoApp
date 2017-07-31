@@ -11,7 +11,8 @@
 
     <section class="main">
     <input class="toggle-all" type="checkbox">
-    <label 
+    <label
+        *ngIf="haveItems"
         for="toggle-all" 
         (click)="toggleAllStatus()"
     >
@@ -30,11 +31,12 @@
     </section>
 
     <display-group
-    [activeCount]="activeCount" 
-    [allItems]="items"
-    (onClearComplete)="onClearComplete($event)"
-    [activeDisplayState]="displayState"
-    (onDisplayChange)="onDisplayChange($event)"
+        *ngIf="haveItems"
+        [activeCount]="activeCount" 
+        [allItems]="items"
+        (onClearComplete)="onClearComplete($event)"
+        [activeDisplayState]="displayState"
+        (onDisplayChange)="onDisplayChange($event)"
     >
     </display-group>
 </section>

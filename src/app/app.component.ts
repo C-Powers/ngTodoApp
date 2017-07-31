@@ -15,6 +15,7 @@ let DISPLAYSTATE = 'all';
 export class AppComponent  {
   name = 'AngularTODO';
   items: TodoItem[] = ITEMS;
+  haveItems: boolean = this.items.length > 0;
   displayState = DISPLAYSTATE;
   value = '';
   activeCount = (function(allItems: TodoItem[]): number {
