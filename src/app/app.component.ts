@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { TodoItem } from './shared/todoItem';
 
 const ITEMS: TodoItem[] = [
-  {id: 1, state: 'active', name: 'eat'},
-  {id: 2, state: 'active', name: 'sleep'}
+  // {id: 1, state: 'active', name: 'eat'},
+  // {id: 2, state: 'active', name: 'sleep'}
 ];
 
 let DISPLAYSTATE = 'all';
@@ -15,7 +15,6 @@ let DISPLAYSTATE = 'all';
 export class AppComponent  {
   name = 'AngularTODO';
   items: TodoItem[] = ITEMS;
-  haveItems: boolean = this.items.length > 0;
   displayState = DISPLAYSTATE;
   value = '';
   activeCount = (function(allItems: TodoItem[]): number {
@@ -30,11 +29,6 @@ export class AppComponent  {
 
   addNewTodo(value: string): void {
     this.value = value;
-    // this.items.push({
-    //   id: 0,
-    //   state: 'active',
-    //   name: value
-    // });
     this.items.push(new TodoItem(0, 'active', value));
     this.activeCount++;
   }
@@ -70,5 +64,10 @@ export class AppComponent  {
       }
       this.activeCount = this.items.length;
     }
+  }
+
+  checkForItems(): boolean {
+    if (this.items.length > 0) return true;
+    else return false; 
   }
 }

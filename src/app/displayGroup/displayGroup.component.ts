@@ -23,7 +23,7 @@ export class DisplayGroupComponent {
 
     // onlyActiveTodos: TodoItem[];
 
-    updateDisplayState(buttonType: string): void {
+    public updateDisplayState(buttonType: string): void {
         for (let button of this.buttons) {
             if (button.name === buttonType) {
                 button.state = 'selected';
@@ -35,8 +35,17 @@ export class DisplayGroupComponent {
         this.onDisplayChange.emit(buttonType);
     }
 
-    clearCompleted(items: TodoItem[]): void {
-        const onlyActive = items.filter((item) => {
+    public checkForCompleted(): boolean {
+        for (let item of this.allItems) {
+            if (item.state === 'completed') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public clearCompleted(): void {
+        const onlyActive = this.allItems.filter((item) => {
             if (item.state === 'active') {
                 return item;
             }

@@ -1,5 +1,6 @@
 #ngTodo MVC app
-
+It should look like:
+http://todomvc.com/examples/react/#/
 ### npm scripts
 
 We've captured many of the most useful commands in npm scripts defined in the `package.json`:
