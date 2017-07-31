@@ -1,4 +1,4 @@
-<li *ngIf="item" class={{item.state}}>
+<li *ngIf="item" class="{{item.state}} {{isEditing()}}">
     <div class="view">
         <input
             (click)="stateToggle()" 
@@ -6,27 +6,36 @@
             type="checkbox"
             [checked]="setCheckedState()"
         >
-        <label *ngIf="!isEdit"
+        <!-- <label *ngIf="!isEdit"
             (click)="isEdit=true"
             class="todoItem-label"
-        >
+        > -->
+        <label (click)="isEdit=true" class="todoItem-label">
             {{item.name}}
         </label>
-        <input *ngIf="isEdit"
+        <!-- <input *ngIf="isEdit"
             #editItemInput 
             (keydown.enter)="editItem(editItemInput.value)"
-            (keydown)="onEscapePress($event)"
+            (keydown.escape)="onEscapePress($event)"
             class="new-todo"
             placeholder="Edit This Item"
             value="{{item.name}}"
             (blur)="onInputBlur()"
             focus-me="true"
-        >
+        > -->
         <button 
             (click)="destroyItem()"
             class="destroy"
         >
         </button>
     </div>
-    <input class="edit" value="Create a TodoMVC template">
+    <input
+        #editItemInput 
+        (keydown.enter)="editItem(editItemInput.value)"
+        (keydown.escape)="onEscapePress($event)"
+        class="edit"
+        value="{{getItemValue()}}"
+        (blur)="onInputBlur()"
+        focus-me="true"
+    >
 </li>

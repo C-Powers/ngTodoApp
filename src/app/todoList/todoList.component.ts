@@ -15,6 +15,11 @@ export class TodoListComponent {
 
     public isEdit = false;
 
+    isEditing(): string {
+        if (this.isEdit) return 'editing';
+        else return 'not-editing';
+    }
+
     stateToggle(): void {
         if (this.item.state === 'active') {
             this.item.state = 'completed';
