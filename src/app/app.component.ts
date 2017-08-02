@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { TodoItem } from './shared/todoItem';
 
 const ITEMS: TodoItem[] = [
-  // {id: 1, state: 'active', name: 'eat'},
-  // {id: 2, state: 'active', name: 'sleep'}
+  {id: 1, state: 'active', name: 'eat'},
+  {id: 2, state: 'active', name: 'sleep'}
 ];
 
 let DISPLAYSTATE = 'all';
@@ -38,6 +38,7 @@ export class AppComponent  {
   }
 
   onClearComplete(values: TodoItem[]): void {
+    this.displayState = 'all';
     this.items = values;
   }
 

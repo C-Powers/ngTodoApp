@@ -34,7 +34,7 @@
         (keydown.enter)="editItem(editItemInput.value)"
         (keydown.escape)="onEscapePress($event)"
         class="edit"
-        value="{{getItemValue()}}"
+        value="{{item.name}}"
         (blur)="onInputBlur()"
         focus-me="true"
     >

@@ -50,7 +50,9 @@ export class DisplayGroupComponent {
                 return item;
             }
         });
-        console.log('onlyActive', onlyActive);
+
+        this.updateDisplayState('all');
+
         this.onClearComplete.emit(onlyActive);
     }
 }

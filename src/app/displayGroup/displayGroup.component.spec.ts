@@ -74,7 +74,7 @@ describe('DisplayGroupComponent', () => {
             });
             done();
         });
-        comp.clearCompleted(expectedAllItems);
+        comp.clearCompleted();
     });
 
 });
