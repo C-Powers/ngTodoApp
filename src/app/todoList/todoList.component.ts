@@ -1,11 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TodoItem } from '../shared/todoItem';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { TodoItem } from "../shared/todoItem";
 
 @Component({
-    selector: 'todo-list',
-    templateUrl: './todoList.component.html'
+    selector: "todo-list",
+    templateUrl: "./todoList.component.html"
 })
-
 export class TodoListComponent {
     @Input() item: TodoItem;
     @Input() allItems: TodoItem[];
@@ -16,16 +15,16 @@ export class TodoListComponent {
     public isEdit = false;
 
     isEditing(): string {
-        if (this.isEdit) return 'editing';
-        else return 'not-editing';
+        if (this.isEdit) return "editing";
+        return "";
     }
 
     stateToggle(): void {
-        if (this.item.state === 'active') {
-            this.item.state = 'completed';
+        if (this.item.state === "active") {
+            this.item.state = "completed";
             this.activeCount--;
         } else {
-            this.item.state = 'active';
+            this.item.state = "active";
             this.activeCount++;
         }
 
@@ -34,15 +33,15 @@ export class TodoListComponent {
 
     destroyItem(): void {
         this.allItems.splice(this.allItems.indexOf(this.item), 1);
-        if (this.item.state === 'active') {
+        if (this.item.state === "active") {
             this.activeCount--;
             this.onCountChange.emit(this.activeCount);
         }
     }
 
     setCheckedState(): boolean {
-        if (this.item.state === 'completed') return true;
-        else if (this.item.state === 'active') return false;
+        if (this.item.state === "completed") return true;
+        else if (this.item.state === "active") return false;
     }
 
     editItem(newItemName: string): void {
@@ -56,7 +55,7 @@ export class TodoListComponent {
     }
 
     onEscapePress(event: any): void {
-        if (event.key === 'Escape') {
+        if (event.key === "Escape") {
             this.isEdit = false;
             return;
         } else {
