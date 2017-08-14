@@ -14,7 +14,16 @@ export class TodoListComponent {
 
     public isEdit = false;
 
+    /**
+     * testing testing what's this all about
+     * Something something look at this {@link TodoItem}
+     */
     isEditing(): string {
+        /**
+         * this is a test comment
+         * @type something
+         * @return something else
+         */
         if (this.isEdit) return "editing";
         return "";
     }
