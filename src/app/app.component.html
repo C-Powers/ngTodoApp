@@ -30,13 +30,6 @@
         </ul>
     </section>
 
-    <display-group
-        *ngIf="checkForItems()"
-        [activeCount]="activeCount" 
-        [allItems]="items"
-        (onClearComplete)="onClearComplete($event)"
-        [activeDisplayState]="displayState"
-        (onDisplayChange)="onDisplayChange($event)"
-    >
+    <display-group *ngIf="checkForItems()">
     </display-group>
 </section>
