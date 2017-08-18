@@ -9,30 +9,30 @@ import { Observable } from "rxjs/Rx";
 })
 export class AppComponent implements OnInit {
     public name = "AngularTODO";
-    public items: TodoItem[] = this.itemService.items;
-    public _items: TodoItem[];
+    // public items: TodoItem[] = this.itemService.items;
+    public items: TodoItem[];
     public displayState: string = this.itemService.displayState;
     public _displayState: string;
-    public activeCount: number = this.itemService.activeCount();
 
     constructor(public itemService: ItemService) {}
 
     ngOnInit() {
-        this.itemService.getItems().subscribe(data => (this._items = data));
+        this.itemService.getItems().subscribe(data => (this.items = data));
+
         this.itemService
             .getDisplayState()
             .subscribe(data => (this._displayState = data));
-        console.log(`this._items ${this._items}`);
-    }
 
-    ds() {
-        return this._displayState;
+        // this.itemService
+        //     .getActiveCount()
+        //     .subscribe(data => (this._activeCount = data));
+
+        console.log(`this.items ${this.items}`);
     }
 
     addNewTodo(value: string): void {
-        console.log(this._items);
+        console.log(this.items);
         this.itemService.addNewTodo(value);
-        this.activeCount = this.itemService.activeCount();
     }
 
     toggleAllStatus(): void {
@@ -44,7 +44,6 @@ export class AppComponent implements OnInit {
         }
 
         this.itemService.toggleStatuses(anyStatusActive);
-        this.activeCount = this.itemService.activeCount();
     }
 
     checkForItems(): boolean {

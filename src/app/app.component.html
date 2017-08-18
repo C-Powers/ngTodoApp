@@ -20,7 +20,7 @@
         </label>
         <ul class="todo-list">
             <todo-list 
-                *ngFor="let item of items | statefilter:ds()" 
+                *ngFor="let item of items | statefilter:displayState" 
                 [item]="item"
             > 
             </todo-list>

@@ -12,9 +12,13 @@ export class ItemService {
     public getItems(): Observable<TodoItem[]> {
         console.log(`this.items ${this.items}`);
         // return Observable.of(
-        //     this.items.filter(
-        //         (item: TodoItem) => item.state === this.displayState
-        //     )
+        //     this.items.filter((item: TodoItem) => {
+        //         if (this.displayState === "all") {
+        //             return true;
+        //         } else {
+        //             return item.state === this.displayState;
+        //         }
+        //     })
         // );
         return Observable.of(this.items);
     }
@@ -24,16 +28,12 @@ export class ItemService {
         return Observable.of(this.displayState);
     }
 
-    public getActiveCount(): Observable<number> {
-        console.log(`active count`, this.activeCount());
-        return Observable.of(this.activeCount());
-    }
-
-    public activeCount(): number {
-        return this.items.filter((item: TodoItem) => {
-            return item.state === "active";
-        }).length;
-    }
+    // Brought into DisplayGroup, only needed in that single comp
+    // public activeCount(): number {
+    //     return this.items.filter((item: TodoItem) => {
+    //         return item.state === "active";
+    //     }).length;
+    // }
 
     public addNewTodo(value: string): void {
         this.items.push(new TodoItem("active", value));

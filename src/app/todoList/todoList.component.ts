@@ -20,24 +20,12 @@ export class TodoListComponent {
 
     stateToggle(): void {
         this.itemService.toggleItemStatus(this.item);
-        // if (this.item.state === "active") {
-        //     this.item.state = "completed";
-        //     this.activeCount--;
-        // } else {
-        //     this.item.state = "active";
-        //     this.activeCount++;
-        // }
     }
 
     destroyItem(): void {
         console.log(this.itemService.items);
         console.log("destroying item");
         this.itemService.removeTodo(this.item);
-        // this.allItems.splice(this.allItems.indexOf(this.item), 1);
-        // if (this.item.state === "active") {
-        //     this.activeCount--;
-        //     this.onCountChange.emit(this.activeCount);
-        // }
     }
 
     setCheckedState(): boolean {

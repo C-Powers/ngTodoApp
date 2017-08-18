@@ -20,12 +20,14 @@ export class DisplayGroupComponent implements OnInit {
     public ngOnInit() {
         // this.itemService
         //     .getActiveCount()
-        //     .subscribe(data => (this._activeCount = data));
-        // console.log(`this._activeCount ${this._activeCount}`);
+        //     .subscribe(data => (this.activeCount = data));
+        // console.log(`this.activeCount ${this.activeCount}`);
     }
 
-    public itemCount() {
-        return this.itemService.activeCount();
+    public activeCount(): number {
+        return this.itemService.items.filter((item: TodoItem) => {
+            return item.state === "active";
+        }).length;
     }
 
     public updateDisplayState(buttonType: string): void {
@@ -36,6 +38,8 @@ export class DisplayGroupComponent implements OnInit {
                 button.state = "not-selected";
             }
         }
+
+        console.log("display state button type");
 
         this.itemService.displayState = buttonType;
         // this.onDisplayChange.emit(buttonType);
