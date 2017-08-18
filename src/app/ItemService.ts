@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { TodoItem } from "./shared/todoItem";
+import { Observable } from "rxjs/Rx";
 
 @Injectable()
 export class ItemService {
@@ -7,6 +8,26 @@ export class ItemService {
 
     //  Default app to show all items
     public displayState = "all";
+
+    public getItems(): Observable<TodoItem[]> {
+        console.log(`this.items ${this.items}`);
+        // return Observable.of(
+        //     this.items.filter(
+        //         (item: TodoItem) => item.state === this.displayState
+        //     )
+        // );
+        return Observable.of(this.items);
+    }
+
+    public getDisplayState(): Observable<string> {
+        console.log(`this.displayState ${this.displayState}`);
+        return Observable.of(this.displayState);
+    }
+
+    public getActiveCount(): Observable<number> {
+        console.log(`active count`, this.activeCount());
+        return Observable.of(this.activeCount());
+    }
 
     public activeCount(): number {
         return this.items.filter((item: TodoItem) => {
@@ -18,14 +39,31 @@ export class ItemService {
         this.items.push(new TodoItem("active", value));
     }
 
+    public removeTodo(item: TodoItem): void {
+        this.items.splice(this.items.indexOf(item), 1);
+    }
+
     public clearComplete(): void {
+        console.log("item service clear complete");
         this.displayState = "all";
         this.items = this.items.filter((item: TodoItem) => {
             return item.state === "active";
         });
     }
 
-    public toggleStatus(anyStatusActive: boolean): void {
+    public toggleItemStatus(refItem: TodoItem): void {
+        this.items.forEach((item: TodoItem) => {
+            if (item.name === refItem.name) {
+                if (item.state === "active") {
+                    item.state = "completed";
+                } else {
+                    item.state = "active";
+                }
+            }
+        });
+    }
+
+    public toggleStatuses(anyStatusActive: boolean): void {
         if (anyStatusActive) {
             for (let item of this.items) {
                 item.state = "completed";

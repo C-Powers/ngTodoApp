@@ -1,6 +1,6 @@
 <footer class="footer">
     <span *ngIf="activeCount === 0 || activeCount > 1" class="todo-count"><strong>{{activeCount}}</strong> items remaining</span>
-    <span *ngIf="activeCount === 1" class="todo-count"><strong>{{activeCount}}</strong> item remaining</span>
+    <span *ngIf="activeCount === 1" class="todo-count"><strong>{{itemCount()}}</strong> item remaining</span>
     <ul class="filters">
         <li>
             <a (click)="updateDisplayState('all')" 
@@ -28,7 +28,7 @@
         </li>
     </ul>
     <button *ngIf="checkForCompleted()"
-            (click)="onlyActiveTodos=clearCompleted()"
+            (click)="clearComplete()"
             class="clear-completed"
     >
         Clear completed

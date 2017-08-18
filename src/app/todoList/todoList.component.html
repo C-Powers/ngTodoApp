@@ -6,23 +6,9 @@
             type="checkbox"
             [checked]="setCheckedState()"
         >
-        <!-- <label *ngIf="!isEdit"
-            (click)="isEdit=true"
-            class="todoItem-label"
-        > -->
         <label (click)="isEdit=true" class="todoItem-label">
             {{item.name}}
         </label>
-        <!-- <input *ngIf="isEdit"
-            #editItemInput 
-            (keydown.enter)="editItem(editItemInput.value)"
-            (keydown.escape)="onEscapePress($event)"
-            class="new-todo"
-            placeholder="Edit This Item"
-            value="{{item.name}}"
-            (blur)="onInputBlur()"
-            focus-me="true"
-        > -->
         <button 
             (click)="destroyItem()"
             class="destroy"

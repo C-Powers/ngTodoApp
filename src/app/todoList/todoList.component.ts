@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { ItemService } from "../ItemService";
 import { TodoItem } from "../shared/todoItem";
 
 @Component({
@@ -7,45 +8,36 @@ import { TodoItem } from "../shared/todoItem";
 })
 export class TodoListComponent {
     @Input() item: TodoItem;
-    @Input() allItems: TodoItem[];
-
-    @Input() activeCount: number;
-    @Output() onCountChange = new EventEmitter<number>();
 
     public isEdit = false;
 
-    /**
-     * testing testing what's this all about
-     * Something something look at this {@link TodoItem}
-     */
+    constructor(public itemService: ItemService) {}
+
     isEditing(): string {
-        /**
-         * this is a test comment
-         * @type something
-         * @return something else
-         */
         if (this.isEdit) return "editing";
         return "";
     }
 
     stateToggle(): void {
-        if (this.item.state === "active") {
-            this.item.state = "completed";
-            this.activeCount--;
-        } else {
-            this.item.state = "active";
-            this.activeCount++;
-        }
-
-        this.onCountChange.emit(this.activeCount);
+        this.itemService.toggleItemStatus(this.item);
+        // if (this.item.state === "active") {
+        //     this.item.state = "completed";
+        //     this.activeCount--;
+        // } else {
+        //     this.item.state = "active";
+        //     this.activeCount++;
+        // }
     }
 
     destroyItem(): void {
-        this.allItems.splice(this.allItems.indexOf(this.item), 1);
-        if (this.item.state === "active") {
-            this.activeCount--;
-            this.onCountChange.emit(this.activeCount);
-        }
+        console.log(this.itemService.items);
+        console.log("destroying item");
+        this.itemService.removeTodo(this.item);
+        // this.allItems.splice(this.allItems.indexOf(this.item), 1);
+        // if (this.item.state === "active") {
+        //     this.activeCount--;
+        //     this.onCountChange.emit(this.activeCount);
+        // }
     }
 
     setCheckedState(): boolean {

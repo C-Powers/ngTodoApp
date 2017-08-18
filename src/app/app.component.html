@@ -20,11 +20,8 @@
         </label>
         <ul class="todo-list">
             <todo-list 
-            [allItems]="items"
-            *ngFor="let item of items | statefilter:displayState" 
-            [item]="item"
-            [activeCount]="activeCount"
-            (onCountChange)="onCountChange($event)"
+                *ngFor="let item of items | statefilter:ds()" 
+                [item]="item"
             > 
             </todo-list>
         </ul>
