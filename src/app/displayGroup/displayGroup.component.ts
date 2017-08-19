@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { TodoItem } from "../shared/todoItem";
 import { ItemService } from "../ItemService";
 
@@ -6,7 +6,7 @@ import { ItemService } from "../ItemService";
     selector: "display-group",
     templateUrl: "./displayGroup.component.html"
 })
-export class DisplayGroupComponent implements OnInit {
+export class DisplayGroupComponent {
     public activeDisplayState: string = this.itemService.displayState;
 
     public buttons = [
@@ -16,13 +16,6 @@ export class DisplayGroupComponent implements OnInit {
     ];
 
     constructor(public itemService: ItemService) {}
-
-    public ngOnInit() {
-        // this.itemService
-        //     .getActiveCount()
-        //     .subscribe(data => (this.activeCount = data));
-        // console.log(`this.activeCount ${this.activeCount}`);
-    }
 
     public activeCount(): number {
         return this.itemService.items.filter((item: TodoItem) => {
