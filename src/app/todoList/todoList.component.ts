@@ -7,7 +7,7 @@ import { TodoItem } from "../shared/todoItem";
     templateUrl: "./todoList.component.html"
 })
 export class TodoListComponent {
-    @Input() item: TodoItem;
+    @Input() public item: TodoItem;
 
     public isEdit = false;
 
