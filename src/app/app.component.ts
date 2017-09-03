@@ -18,9 +18,9 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.itemService.getItems().subscribe(data => (this.items = data));
 
-        this.itemService
-            .getDisplayState()
-            .subscribe(data => (this.displayState = data));
+        // this.itemService
+        //     .getDisplayState()
+        //     .subscribe(data => (this.displayState = data));
     }
 
     addNewTodo(value: string): void {
