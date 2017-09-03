@@ -1,9 +1,10 @@
 <footer class="footer">
-    <span *ngIf="activeCount === 0 || activeCount > 1" class="todo-count"><strong>{{activeCount}}</strong> items remaining</span>
-    <span *ngIf="activeCount === 1" class="todo-count"><strong>{{activeCount}}</strong> item remaining</span>
+    <span *ngIf="activeCount() === 0 || activeCount() > 1" class="todo-count"><strong>{{activeCount()}}</strong> items remaining</span>
+    <span *ngIf="activeCount() === 1" class="todo-count"><strong>{{activeCount()}}</strong> item remaining</span>
+    <!-- <span class="todo-count"><strong>{{activeCount()}}</strong> item remaining</span> -->
     <ul class="filters">
         <li>
-            <a (click)="updateDisplayState('all')" 
+            <a (click)="updateDisplayState(buttons[0].name)" 
                 class={{buttons[0].state}} 
                 href="#/"
             >
@@ -11,7 +12,7 @@
             </a>
         </li>
         <li>
-            <a (click)="updateDisplayState('active')"
+            <a (click)="updateDisplayState(buttons[1].name)"
                 class={{buttons[1].state}} 
                 href="#/active"
             >
@@ -19,7 +20,7 @@
             </a>
         </li>
         <li>
-            <a (click)="updateDisplayState('completed')" 
+            <a (click)="updateDisplayState(buttons[2].name)" 
                 class={{buttons[2].state}}
                 href="#/completed"
             >
@@ -28,7 +29,7 @@
         </li>
     </ul>
     <button *ngIf="checkForCompleted()"
-            (click)="onlyActiveTodos=clearCompleted()"
+            (click)="itemService.clearComplete()"
             class="clear-completed"
     >
         Clear completed

@@ -1,11 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { TodoItem } from './todoItem';
+import { Pipe, PipeTransform } from "@angular/core";
+import { TodoItem } from "./todoItem";
 
 @Pipe({
-    name: 'statefilter',
+    name: "statefilter",
     pure: false
 })
-
 export class StateFilterPipe implements PipeTransform {
     transform(items: TodoItem[], filter: string): TodoItem[] {
         if (!items || !filter) {
@@ -15,7 +14,7 @@ export class StateFilterPipe implements PipeTransform {
     }
 
     applyFilter(item: TodoItem, filter: string): boolean {
-        if (filter !== 'all') {
+        if (filter !== "all") {
             if (item.state === filter) {
                 return true;
             } else {

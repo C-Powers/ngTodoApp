@@ -1,58 +1,51 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TodoItem } from '../shared/todoItem';
+import { Component } from "@angular/core";
+import { TodoItem } from "../shared/todoItem";
+import { ItemService } from "../ItemService";
 
 @Component({
-    selector: 'display-group',
-    templateUrl: './displayGroup.component.html'
+  selector: "display-group",
+  templateUrl: "./displayGroup.component.html"
 })
-
 export class DisplayGroupComponent {
-    @Input() activeCount: number;
+  public activeDisplayState: string = this.itemService.displayState;
 
-    @Input() allItems: TodoItem[];
-    @Output() onClearComplete = new EventEmitter<TodoItem[]>();
+  public buttons = [
+    { name: "all", state: "selected" },
+    { name: "active", state: "not-selected" },
+    { name: "completed", state: "not-selected" }
+  ];
 
-    @Input() activeDisplayState: string;
-    @Output() onDisplayChange = new EventEmitter<string>();
+  constructor(public itemService: ItemService) {}
 
-    public buttons = [
-        {name: 'all', state: 'selected'},
-        {name: 'active', state: 'not-selected'},
-        {name: 'completed', state: 'not-selected'}
-    ];
+  public activeCount(): number {
+    return this.itemService.items.filter((item: TodoItem) => {
+      return item.state === "active";
+    }).length;
+  }
 
-    // onlyActiveTodos: TodoItem[];
-
-    public updateDisplayState(buttonType: string): void {
-        for (let button of this.buttons) {
-            if (button.name === buttonType) {
-                button.state = 'selected';
-            } else {
-                button.state = 'not-selected';
-            }
-        }
-
-        this.onDisplayChange.emit(buttonType);
+  public updateDisplayState(buttonType: string): void {
+    for (let button of this.buttons) {
+      if (button.name === buttonType) {
+        button.state = "selected";
+      } else {
+        button.state = "not-selected";
+      }
     }
 
-    public checkForCompleted(): boolean {
-        for (let item of this.allItems) {
-            if (item.state === 'completed') {
-                return true;
-            }
-        }
-        return false;
+    this.itemService.displayState = buttonType;
+  }
+
+  public checkForCompleted(): boolean {
+    let anyComplete = false;
+    for (let item of this.itemService.items) {
+      if (item.state === "completed") {
+        anyComplete = true;
+      }
     }
+    return anyComplete;
+  }
 
-    public clearCompleted(): void {
-        const onlyActive = this.allItems.filter((item) => {
-            if (item.state === 'active') {
-                return item;
-            }
-        });
-
-        this.updateDisplayState('all');
-
-        this.onClearComplete.emit(onlyActive);
-    }
+  public clearComplete(): void {
+    this.itemService.clearComplete();
+  }
 }
