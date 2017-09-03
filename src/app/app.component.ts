@@ -11,8 +11,7 @@ export class AppComponent implements OnInit {
     public name = "AngularTODO";
     // public items: TodoItem[] = this.itemService.items;
     public items: TodoItem[];
-    public displayState: string = this.itemService.displayState;
-    public _displayState: string;
+    public displayState: string;
 
     constructor(public itemService: ItemService) {}
 
@@ -21,18 +20,11 @@ export class AppComponent implements OnInit {
 
         this.itemService
             .getDisplayState()
-            .subscribe(data => (this._displayState = data));
-
-        // this.itemService
-        //     .getActiveCount()
-        //     .subscribe(data => (this._activeCount = data));
-
-        console.log(`this.items ${this.items}`);
+            .subscribe(data => (this.displayState = data));
     }
 
     addNewTodo(value: string): void {
-        console.log(this.items);
-        this.itemService.addNewTodo(value);
+        this.itemService.items.push(new TodoItem("active", value));
     }
 
     toggleAllStatus(): void {

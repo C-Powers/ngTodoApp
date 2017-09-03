@@ -24,6 +24,7 @@ export class DisplayGroupComponent {
     }
 
     public updateDisplayState(buttonType: string): void {
+        console.log("old display state", this.itemService.displayState);
         for (let button of this.buttons) {
             if (button.name === buttonType) {
                 button.state = "selected";
@@ -32,10 +33,8 @@ export class DisplayGroupComponent {
             }
         }
 
-        console.log("display state button type");
-
         this.itemService.displayState = buttonType;
-        // this.onDisplayChange.emit(buttonType);
+        console.log("new display state", this.itemService.displayState);
     }
 
     public checkForCompleted(): boolean {

@@ -19,19 +19,20 @@ export class ItemService {
         return Observable.of(this.displayState);
     }
 
-    public addNewTodo(value: string): void {
-        this.items.push(new TodoItem("active", value));
-    }
+    // public addNewTodo(value: string): void {
+    //     this.items.push(new TodoItem("active", value));
+    // }
 
     public removeTodo(item: TodoItem): void {
         this.items.splice(this.items.indexOf(item), 1);
     }
 
     public clearComplete(): void {
-        console.log("item service clear complete");
         this.displayState = "all";
-        this.items = this.items.filter((item: TodoItem) => {
-            return item.state === "active";
+        this.items.forEach((item: TodoItem, index: number) => {
+            if (item.state === "completed") {
+                this.items.splice(index, 1);
+            }
         });
     }
 

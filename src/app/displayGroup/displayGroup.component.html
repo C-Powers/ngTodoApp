@@ -4,7 +4,7 @@
     <!-- <span class="todo-count"><strong>{{activeCount()}}</strong> item remaining</span> -->
     <ul class="filters">
         <li>
-            <a (click)="updateDisplayState('all')" 
+            <a (click)="updateDisplayState(buttons[0].name)" 
                 class={{buttons[0].state}} 
                 href="#/"
             >
@@ -12,7 +12,7 @@
             </a>
         </li>
         <li>
-            <a (click)="updateDisplayState('active')"
+            <a (click)="updateDisplayState(buttons[1].name)"
                 class={{buttons[1].state}} 
                 href="#/active"
             >
@@ -20,7 +20,7 @@
             </a>
         </li>
         <li>
-            <a (click)="updateDisplayState('completed')" 
+            <a (click)="updateDisplayState(buttons[2].name)" 
                 class={{buttons[2].state}}
                 href="#/completed"
             >
@@ -29,7 +29,7 @@
         </li>
     </ul>
     <button *ngIf="checkForCompleted()"
-            (click)="clearComplete()"
+            (click)="itemService.clearComplete()"
             class="clear-completed"
     >
         Clear completed
